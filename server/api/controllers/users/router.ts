@@ -5,5 +5,6 @@ export default express
   .Router()
   .post('/', controller.create)
   .get('/', controller.all)
+  .get('/:id/favorites', controller.favorites)
   .get('/:id', controller.byId)
   .put('/:id', controller.update);

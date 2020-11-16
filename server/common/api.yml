@@ -129,6 +129,24 @@ paths:
         404:
           description: Favorite not found
           content: {}
+  /users/{id}/favorites:
+    get:
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        description: The id of the user to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Return the favorites for the user with the specified id
+          content: {}
+        404:
+          description: User not found
+          content: {}
   /spec:
     get:
       tags:

@@ -1,4 +1,5 @@
 import UsersService from '../../services/users.service';
+import FavoritesService from '../../services/favorites.service';
 import { Request, Response } from 'express';
 
 export class Controller {
@@ -32,5 +33,13 @@ export class Controller {
       else res.status(404).end();
     });
   }
+
+  favorites(req: Request, res: Response): void {
+    const id = req.params['id'];
+    FavoritesService.byUser(id).then((r) => {
+      res.status(200).json(r);
+    });
+  }
 }
+
 export default new Controller();

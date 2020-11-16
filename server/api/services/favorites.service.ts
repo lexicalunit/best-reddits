@@ -9,6 +9,11 @@ export interface Favorite {
 }
 
 export class FavoritesService {
+  async byUser(id: string): Promise<Favorite[]> {
+    L.info(`fetch favorites for user with id ${id}`);
+    return data.favorites.filter((favorite) => favorite.user_id === id);
+  }
+
   async byId(id: string): Promise<Favorite> {
     L.info(`fetch favorite with id ${id}`);
     return data.favorites.find((favorite) => favorite.id === id);
