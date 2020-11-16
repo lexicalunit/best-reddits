@@ -15,5 +15,13 @@ export class Controller {
       res.status(200).json(r);
     });
   }
+
+  delete(req: Request, res: Response): void {
+    const id = req.params['id'];
+    FavoritesService.delete(id).then((r) => {
+      if (r) res.status(204).end();
+      else res.status(404).end();
+    });
+  }
 }
 export default new Controller();

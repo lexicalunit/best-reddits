@@ -16,6 +16,8 @@ class Data {
       {
         id: 'c558d991-8c8e-40d1-af48-2d680d8cd075',
         name: 'Amy Troschinetz',
+        alert: 9,
+        notify: true,
       },
     ];
     this.favorites = [

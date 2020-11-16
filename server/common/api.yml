@@ -55,6 +55,30 @@ paths:
         404:
           description: User not found
           content: {}
+    put:
+      tags:
+      - Users
+      requestBody:
+        description: a user's properties
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserBody'
+        required: true
+      parameters:
+      - name: id
+        in: path
+        description: The id of the user to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Return the user with the specified id
+          content: {}
+        404:
+          description: User not found
+          content: {}
   /favorites:
     post:
       tags:
@@ -88,6 +112,23 @@ paths:
         404:
           description: Favorite not found
           content: {}
+    delete:
+      tags:
+      - Favorites
+      parameters:
+      - name: id
+        in: path
+        description: The id of the favorite to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        204:
+          description: The favorite was deleted
+          content: {}
+        404:
+          description: Favorite not found
+          content: {}
   /spec:
     get:
       tags:
@@ -107,6 +148,19 @@ components:
         name:
           type: string
           example: Amy
+    UpdateUserBody:
+      title: user
+      type: object
+      properties:
+        name:
+          type: string
+          example: Amy
+        alert:
+          type: number
+          example: 8
+        notify:
+          type: boolean
+          example: true
     FavoriteBody:
       title: favorite
       required:

@@ -11,7 +11,7 @@ export interface Favorite {
 export class FavoritesService {
   async byId(id: string): Promise<Favorite> {
     L.info(`fetch favorite with id ${id}`);
-    return data.favorites.find((favorite) => favorite.id == id);
+    return data.favorites.find((favorite) => favorite.id === id);
   }
 
   async create(user_id: string, link: string): Promise<Favorite> {
@@ -23,6 +23,18 @@ export class FavoritesService {
     };
     data.favorites.push(favorite);
     return Promise.resolve(favorite);
+  }
+
+  async delete(id: string): Promise<Favorite> {
+    L.info(`delete favorite with id ${id}`);
+    const index = data.favorites.findIndex((favorite) => favorite.id === id);
+    if (index !== -1) {
+      const deleted = data.favorites[index];
+      data.favorites.splice(index, 1);
+      return Promise.resolve(deleted);
+    } else {
+      return Promise.resolve(undefined);
+    }
   }
 }
 
