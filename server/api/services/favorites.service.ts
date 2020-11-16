@@ -1,6 +1,6 @@
 import L from '../../common/logger';
 import data from '../../common/data';
-import uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export interface Favorite {
   id: string;
@@ -20,12 +20,13 @@ export class FavoritesService {
   }
 
   async create(user_id: string, link: string): Promise<Favorite> {
-    L.info(`create a favorite user id ${user_id} for the link ${link}`);
+    L.info(`create a favorite for user with id ${user_id} for the link ${link}`);
     const favorite: Favorite = {
-      id: uuid.v4(),
+      id: uuid(),
       user_id,
       link,
     };
+    // Note: It might be helpful to de-dupe favorites.
     data.favorites.push(favorite);
     return Promise.resolve(favorite);
   }

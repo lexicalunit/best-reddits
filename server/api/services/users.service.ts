@@ -1,6 +1,6 @@
 import L from '../../common/logger';
 import data from '../../common/data';
-import uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export interface User {
   id: string;
@@ -24,7 +24,7 @@ export class UsersService {
   async create(name: string): Promise<User> {
     L.info(`create user with name ${name}`);
     const user: User = {
-      id: uuid.v4(),
+      id: uuid(),
       name,
       alert: 8, // default to 8am
       notify: true,

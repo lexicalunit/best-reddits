@@ -7,7 +7,7 @@ async function send_newsletters() {
 
   const users = await UsersService.all();
   users.forEach(async (user) => {
-    if (user.alert === now.getHours()) {
+    if (user.alert === now.getHours() && user.notify) {
       const favorites = await FavoritesService.byUser(user.id);
       const json = JSON.stringify({
         id: user.id,
@@ -27,9 +27,9 @@ async function send_newsletters() {
 const loop = async function (): Promise<void> {
   L.info('Sending newsletters for the hour...');
 
-  const t0 = performance.now();
+  const t0 = process.hrtime();
   await send_newsletters();
-  const t = performance.now();
+  const diff = process.hrtime(t0);
 
   // In a real system I'd use something like cron or a NodeJS task
   // scheduling library. I'm not super familer with task scheduling
@@ -39,7 +39,7 @@ const loop = async function (): Promise<void> {
   // re-run send_newsletters() for every hour of the day. We make sure
   // to offset the interval of 1 hour by however long it took to
   // execute the send_newsletters() call.
-  setTimeout(loop, 3.6e6 - (t - t0));
+  setTimeout(loop, 3.6e6 - diff[1] / 1000000);
 };
 
 export default loop;
