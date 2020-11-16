@@ -8,6 +8,8 @@ servers:
 tags:
 - name: Users
   description: User related endpoints
+- name: Favorites
+  description: Favorite related endpoints
 - name: Specification
   description: The swagger API specification
 paths:
@@ -45,13 +47,46 @@ paths:
         description: The id of the user to retrieve
         required: true
         schema:
-          type: integer
+          type: string
       responses:
         200:
           description: Return the user with the specified id
           content: {}
         404:
           description: User not found
+          content: {}
+  /favorites:
+    post:
+      tags:
+      - Favorites
+      description: Create a favorite for a user
+      requestBody:
+        description: a favorite
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoriteBody'
+        required: true
+      responses:
+        200:
+          description: OK
+  /favorites/{id}:
+    get:
+      tags:
+      - Favorites
+      parameters:
+      - name: id
+        in: path
+        description: The id of the favorite to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Return the favorite with the specified id
+          content: {}
+        404:
+          description: Favorite not found
           content: {}
   /spec:
     get:
@@ -72,3 +107,16 @@ components:
         name:
           type: string
           example: Amy
+    FavoriteBody:
+      title: favorite
+      required:
+      - link
+      - user_id
+      type: object
+      properties:
+        link:
+          type: string
+          example: https://www.reddit.com/r/hognosesnakes/
+        user_id:
+          type: string
+          example: 43da97e3-b219-4215-b31c-16171c413b49

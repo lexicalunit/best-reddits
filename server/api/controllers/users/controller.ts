@@ -7,7 +7,7 @@ export class Controller {
   }
 
   byId(req: Request, res: Response): void {
-    const id = Number.parseInt(req.params['id']);
+    const id = req.params['id'];
     UsersService.byId(id).then((r) => {
       if (r) res.json(r);
       else res.status(404).end();
