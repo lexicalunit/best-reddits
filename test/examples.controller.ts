@@ -18,10 +18,7 @@ describe('Examples', () => {
       .send({ name: 'test' })
       .expect('Content-Type', /json/)
       .then((r) => {
-        expect(r.body)
-          .to.be.an('object')
-          .that.has.property('name')
-          .equal('test');
+        expect(r.body).to.be.an('object').that.has.property('name').equal('test');
       }));
 
   it('should get an example by id', () =>
@@ -29,9 +26,6 @@ describe('Examples', () => {
       .get('/api/v1/examples/2')
       .expect('Content-Type', /json/)
       .then((r) => {
-        expect(r.body)
-          .to.be.an('object')
-          .that.has.property('name')
-          .equal('test');
+        expect(r.body).to.be.an('object').that.has.property('name').equal('test');
       }));
 });
