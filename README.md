@@ -55,7 +55,7 @@ for the unhappy paths.
 Also I talked about my reasoning for the storage solution I went with in the
 file `server/common/data.ts` so be sure to give that a look. I tried to keep
 things very simple and lightweight here rather than bolt on production ready
-services like a database and task scheduler. Or right, see `server/tasks.ts`
+services like a database and task scheduler. Oh right, see `server/tasks.ts`
 for some of my thoughts on the task scheduler solution I went with as well.
 
 ## One more thing, for our seniors...
